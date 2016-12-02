@@ -1,0 +1,24 @@
+// Declare buildscript dependencies
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dictanova.jcasgen.gradle:gradle-jcasgen-plugin:0.1'
+    }
+}
+// Enable plugins
+apply plugin: 'java'
+apply plugin: 'jcasgen'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+// Project dependencies
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.uima:uimaj-core:2.6.0'
+}
