@@ -1,9 +1,33 @@
-apply plugin : 'java'
-apply plugin : 'eclipse'
+// []
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.dictanova.jcasgen.gradle:gradle-jcasgen-plugin:+'
+  }
+}
+
+// []
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'com.dictanova.jcasgen'
+
 
 version = '1.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+// [] 
+//sourceSets {
+//  main {
+//    jcasgen {
+//      srcDir 'src/main/resources/org/apache/uima/fit/examples/tutorial/type/'
+//    }
+//  }
+//}
+
+
 
 
 repositories {
@@ -11,18 +35,8 @@ repositories {
 }
 
 dependencies {
+	     compile 'org.apache.uima:uimaj-core:2.8.1'
 	     compile 'org.apache.uima:uimafit-core:2.1.0'
 }
 
 
-//create a single Jar with all dependencies
-task fatJar(type: Jar) {
-     manifest {
-     	      attributes 'Implementation-Title': 'Gradle Jar File Example',
-	             	'Implementation-Version': version,
-       		  'Main-Class': 'com.mkyong.DateUtils'
-	      }
-      baseName = project.name + '-all'
-      from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-      with jar
- }
