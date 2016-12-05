@@ -9,6 +9,7 @@ bld:
 
 ecl:
 	gradle eclipse
+	sed -i.bak '/"generated-src\/jcasgen\/main"/d' .classpath
 
 cln:
 	rm -rf *~
