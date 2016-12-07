@@ -1,0 +1,5 @@
+build
+bin
+.setting
+.gradle
+*class
