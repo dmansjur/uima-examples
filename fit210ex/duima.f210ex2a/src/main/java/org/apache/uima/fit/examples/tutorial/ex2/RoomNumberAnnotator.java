@@ -49,8 +49,9 @@ import org.apache.uima.util.Level;
  * <li>the initialize method was removed</li>
  * </ul>
  */
-@TypeCapability(outputs = { "org.apache.uima.tutorial.RoomNumber",
-    "org.apache.uima.tutorial.RoomNumber:building" })
+
+@TypeCapability(outputs = { "org.apache.uima.fit.examples.tutorial.type.RoomNumber",
+    "org.apache.uima.fit.examples.tutorial.type.RoomNumber:building" })
 public class RoomNumberAnnotator extends JCasAnnotator_ImplBase {
 
   @ConfigurationParameter(name = "Patterns")
