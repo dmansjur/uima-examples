@@ -17,7 +17,7 @@ cln:
 
 ecl:
 	gradle eclipse
-
+	sed -i.bak '/"generated-src\/jcasgen\/main"/d' .classpath
 
 cln-tld:
 	find ./ -name "*~" -exec rm {} \;

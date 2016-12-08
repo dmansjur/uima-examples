@@ -1,5 +1,10 @@
-build
 bin
-.setting
-.gradle
+build
 *class
+.gradle
+.project
+.settings
+.classpath
+
+
+
