@@ -45,8 +45,8 @@ public class GetStartedQuickDescriptor {
                     "uimaFIT");
 
     // Write the descriptor to an XML file
-    File output = new File("target/examples/GetStartedQuickAE.xml");
-    output.getParentFile().mkdirs();
+    File output = new File("bin/GetStartedQuickAE.xml");
+    //output.getParentFile().mkdirs();
     analysisEngineDescription.toXML(new FileOutputStream(output));
   }
   
