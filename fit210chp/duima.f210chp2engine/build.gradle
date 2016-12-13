@@ -1,0 +1,39 @@
+// Declare buildscript dependencies
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dictanova.jcasgen.gradle:gradle-jcasgen-plugin:0.1'
+    }
+}
+// Enable plugins
+apply plugin: 'java'
+apply plugin: 'jcasgen'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+// Project dependencies
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+//    runtime files('build/generated-src/jcasgen/main/')
+dependencies {
+    compile 'org.apache.uima:uimaj-core:2.6.0'
+    compile 'org.apache.uima:uimafit-core:2.1.0'
+}
+
+
+task( run1, dependsOn: jar, type: JavaExec ) {
+      main = 'org.apache.uima.fit.examples.getstarted.GetStartedQuickPipeline'
+      classpath = sourceSets.main.runtimeClasspath
+}
+
+task( run2, dependsOn: jar, type: JavaExec ) {
+      main = 'org.apache.uima.fit.examples.getstarted.GetStartedQuickDescriptor'
+      classpath = sourceSets.main.runtimeClasspath
+}
+
+
