@@ -1,19 +1,21 @@
 Chapter 3. Pipelines
 ==================================================
 
+
 UIMA is a component-based architecture that allows composing various processing components into a complex processing pipeline.
 A pipeline typically involves a collection reader which ingests documents and analysis engines that do the actual processing.
+
 
 Normally, you would run a pipeline using a UIMA Collection Processing Engine or using UIMA AS.
 uimaFIT offers a third alternative that is much simpler to use and well suited for embedding UIMA pipelines into applications or for writing tests.
 
+
 As uimaFIT does not supply any readers or processing components, we just assume that we have written three components:
 
-TextReader - reads text files from a directory
+ - TextReader - reads text files from a directory
+ - Tokenizer - annotates tokens
+ - TokenFrequencyWriter - writes a list of tokens and their frequency to a file
 
-Tokenizer - annotates tokens
-
-TokenFrequencyWriter - writes a list of tokens and their frequency to a file
 
 
 
