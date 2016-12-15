@@ -21,7 +21,7 @@ If you do not build with Maven, then download uimaFIT from the Apache UIMA downl
 2.2. A simple analysis engine implementation
 
 Here is the complete analysis engine implementation for this example.
-
+'''
 public class GetStartedQuickAE
     extends org.apache.uima.fit.component.JCasAnnotator_ImplBase {
 
@@ -34,6 +34,8 @@ public class GetStartedQuickAE
         System.out.println("Hello world!  Say 'hi' to " + stringParam);
 	  }
 	  }
+'''
+ 
 	  The first thing to note is that the member variable stringParam is annotated with @ConfigurationParameter which tells uimaFIT that this is an analysis engine configuration parameter. It is best practice to create a public constant for the parameter name, here PARAM_STRING The second thing to note is that we extend uimaFIT's version of the JCasAnnotator_ImplBase. The initialize method of this super class calls:
 
 ConfigurationParameterInitializer.initializeConfigurationParameters(
