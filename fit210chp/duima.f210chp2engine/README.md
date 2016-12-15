@@ -22,7 +22,7 @@ If you do not build with Maven, then download uimaFIT from the Apache UIMA downl
 
 Here is the complete analysis engine implementation for this example.
 
-'''
+'''java
 
 public class GetStartedQuickAE
     extends org.apache.uima.fit.component.JCasAnnotator_ImplBase {
