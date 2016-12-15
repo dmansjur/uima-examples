@@ -3,7 +3,8 @@ UIMAJ 2.60 Examples
 
 ### Documentation
 
- -  documenation here
+ - https://uima.apache.org/d/uimaj-2.6.0/
+ - https://uima.apache.org/d/
 
 ### API
 
