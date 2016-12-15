@@ -22,7 +22,7 @@ If you do not build with Maven, then download uimaFIT from the Apache UIMA downl
 
 Here is the complete analysis engine implementation for this example.
 
-```java
+```sh
 
 public class GetStartedQuickAE
     extends org.apache.uima.fit.component.JCasAnnotator_ImplBase {
@@ -34,30 +34,35 @@ public class GetStartedQuickAE
   @Override
     public void process(JCas jCas) throws AnalysisEngineProcessException {
         System.out.println("Hello world!  Say 'hi' to " + stringParam);
-	  }
-	  }
-
+	}
+  }
+  
 ```
+
 
 
   The first thing to note is that the member variable stringParam is annotated with @ConfigurationParameter which tells uimaFIT that this is an analysis engine configuration parameter. It is best practice to create a public constant for the parameter name, here PARAM_STRING The second thing to note is that we extend uimaFIT's version of the JCasAnnotator_ImplBase. The initialize method of this super class calls:
 
-ConfigurationParameterInitializer.initializeConfigurationParameters(
-  Object, UimaContext)
-  which populates the configuration parameters with the appropriate contents of the UimaContext. If you do not want to extend uimaFIT's JCasAnnotator_ImplBase, then you can call this method directly in the initialize method of your analysis engine or any class that implements Initializable. You can call this method for an instance of any class that has configuration parameters.
+```sh
+ConfigurationParameterInitializer.initializeConfigurationParameters(  Object, UimaContext)
+```
+
+which populates the configuration parameters with the appropriate contents of the UimaContext. If you do not want to extend uimaFIT's JCasAnnotator_ImplBase, then you can call this method directly in the initialize method of your analysis engine or any class that implements Initializable. You can call this method for an instance of any class that has configuration parameters.
 
 
 
 
-2.3. Running the analysis engine
+### 2.3. Running the analysis engine
 
 The following lines of code demonstrate how to instantiate and run the analysis engine from a main method:
 
+```sh
 JCas jCas = JCasFactory.createJCas();
 
 AnalysisEngine analysisEngine = AnalysisEngineFactory.createEngine(
   GetStartedQuickAE.class,
     GetStartedQuickAE.PARAM_STRING, "uimaFIT");
+```
 
 analysisEngine.process(jCas);
 In a more involved example, we would probably instantiate a collection reader and run this analysis engine over a collection of documents. Here, it suffices to simply create a JCas. Line 3 instantiates the analysis engine using AnalysisEngineFactory and sets the string parameter named stringParam to the value uimaFIT. Running this simple program sends the following output to the console:
@@ -73,20 +78,24 @@ classpath*:org/apache/uima/fit/examples/tutorial/type/*.xml
 
 2.4. Generate a descriptor file
 
-
 The following lines of code demonstrate how a descriptor file can be generated using the class definition:
 
+```sh
 AnalysisEngine analysisEngine = AnalysisEngineFactory.createEngine(
   GetStartedQuickAE.class,
     GetStartedQuickAE.PARAM_STRING, "uimaFIT");
 
 analysisEngineDescription.toXML(
   new FileOutputStream("GetStartedQuickAE.xml"));
-  If you open the resulting descriptor file you will see that the configuration parameter stringParam is defined with the value set to uimaFIT. We could now instantiate an analysis engine using this descriptor file with a line of code like this:
+```
 
+If you open the resulting descriptor file you will see that the configuration parameter stringParam is defined with the value set to uimaFIT. We could now instantiate an analysis engine using this descriptor file with a line of code like this:
+
+```sh
 AnalysisEngineFactory.createEngine("GetStartedQuickAE");
+```
+
 But, of course, we really wouldn't want to do that now that we can instantiate analysis engines using the class definition as was done above!
 
 This chapter, of course, did not demonstrate every feature of uimaFIT which provides support for annotating external resources, creating aggregate engines, running pipelines, testing components, among others.
-
 
