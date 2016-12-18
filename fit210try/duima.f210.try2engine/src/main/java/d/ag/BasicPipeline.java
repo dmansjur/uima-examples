@@ -18,28 +18,42 @@
  */
 package d.ag;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.util.CasIOUtil;
 import org.apache.uima.jcas.JCas;
 
 public class BasicPipeline {
 
-  public static void main(String[] args) throws UIMAException {
-    // uimaFIT automatically uses all type systems listed in META-INF/org.apache.uima.fit/types.txt
 
-    // uimaFIT doesn't provide any collection readers - so we will just instantiate a JCas and
-    // run it through our AE
-    JCas jCas = JCasFactory.createJCas();
+	/**
+	 * uimaFIT automatically uses all type systems listed in META-INF/org.apache.uima.fit/types.txt	
+	 * @param args
+	 * @throws UIMAException
+	 * @throws IOException
+	 */
+	public static void main(String[] args) throws UIMAException, IOException {
 
-    // Instantiate the analysis engine using the value "uimaFIT" for the parameter
-    // PARAM_STRING ("stringParam").
-    AnalysisEngine analysisEngine = AnalysisEngineFactory.createEngine(AEReader.class,
-    		AEReader.PARAM_DAT_LOC,"src/main/resources/letor4/mq8mb/Fold1/train.txt");    
+		// uimaFIT doesn't provide any collection readers - 
+		// so we will just instantiate a JCas and run it through our AE
+		JCas jCas = JCasFactory.createJCas();
 
-    // run the analysis engine and look for a special greeting in your console.
-    analysisEngine.process(jCas);
-  }
-  
+		// Instantiate the analysis engine 
+		// using the value "train.txt" for the parameter PARAM_DAT_LOC
+		AnalysisEngine analysisEngine = AnalysisEngineFactory.createEngine(AEReader.class,
+				AEReader.PARAM_DAT_LOC,"src/main/resources/letor4/mq8mb/Fold1/train.txt");
+
+		// run the analysis engine and look for a special greeting in your console.
+		analysisEngine.process(jCas);
+
+		CasIOUtil.writeXCas(jCas, new File("tmp/mq8mbFld1.xcas"));
+	}
+	
+	
+
 }

@@ -14,7 +14,7 @@ import org.apache.uima.jcas.cas.DoubleArray;
 import d.ts.MRCandidateAnswer;
 
 
-public class AEReader  extends JCasAnnotator_ImplBase {
+public class AEReader extends JCasAnnotator_ImplBase {
 
 	public static final String PARAM_DAT_LOC = "data_location";
 
@@ -63,6 +63,7 @@ public class AEReader  extends JCasAnnotator_ImplBase {
 				mrca.setLabel(iLabel);
 				mrca.setQid(iQid);
 				mrca.setFactor(da);
+				mrca.addToIndexes(jCas);
 			}
 
 			br.close();
