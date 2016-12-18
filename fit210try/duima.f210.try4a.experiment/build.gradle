@@ -32,6 +32,6 @@ dependencies {
 
 
 task( run, dependsOn: jar, type: JavaExec ) {
-      main = 'org.apache.uima.fit.examples.experiment.pos.RunExperiment'
+      main = 'org.apache.uima.fit.examples.experiment.pos.S0RunExperiment'
       classpath = sourceSets.main.runtimeClasspath
 }

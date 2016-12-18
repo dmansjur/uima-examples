@@ -18,7 +18,6 @@
  */
 package org.apache.uima.fit.examples.experiment.pos;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.uima.UIMAException;
@@ -58,77 +57,69 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
  * task.
  */
 public class S0RunExperiment {
-	
-	  public static final String GOLD_VIEW = "GOLD_VIEW";
 
-	  public static final String SYSTEM_VIEW = "SYSTEM_VIEW";
+	public static final String GOLD_VIEW = "GOLD_VIEW";
 
-	  public static final String VIEW1 = "VIEW1";
+	public static final String SYSTEM_VIEW = "SYSTEM_VIEW";
 
-	  public static final String VIEW2 = "VIEW2";
+	public static final String VIEW1 = "VIEW1";
+
+	public static final String VIEW2 = "VIEW2";
 
 
-  public static void main(String[] args) throws UIMAException, IOException {
-	  
-	  
-    // Choosing different location depending on whether we are in the actual uimaFIT source tree
-    // or in the extracted examples from the binary distribution.
-    String samplePosFileName;
-    if (new File("src/main/resources").exists()) {
-        samplePosFileName = "src/main/resources/org/apache/uima/fit/examples/pos/sample-gold.txt";
-    }
-    else {
-        samplePosFileName = "src/org/apache/uima/fit/examples/pos/sample-gold.txt";
-    }
+	public static void main(String[] args) throws UIMAException, IOException {
 
-    // The lineReader simply copies the lines from the input file into the
-    // default view - one line per CAS
-    CollectionReader lineReader = CollectionReaderFactory.createReader(S1LineReader.class,
-            S1LineReader.PARAM_INPUT_FILE, samplePosFileName);
 
-    AggregateBuilder builder = new AggregateBuilder();
+		String samplePosFileName = "src/main/resources/org/apache/uima/fit/examples/pos/sample-gold.txt";
 
-    // The goldTagger parses the data in the default view into Token objects
-    // along with their part-of-speech tags which will be added to the
-    // GOLD_VIEW
-    AnalysisEngineDescription goldTagger = AnalysisEngineFactory.createEngineDescription(S2aGoldTagger.class);
-            
-    builder.add(goldTagger);
+		// The lineReader simply copies the lines from the input file into the
+		// default view - one line per CAS
+		CollectionReader lineReader = CollectionReaderFactory.createReader(S1LineReader.class,
+				S1LineReader.PARAM_INPUT_FILE, samplePosFileName);
 
-    // The textCopier creates the SYSTEM_VIEW and set the text of this view
-    // to that of the text found in GOLD_VIEW
-    AnalysisEngineDescription textCopier = AnalysisEngineFactory.createEngineDescription(
-            ViewTextCopierAnnotator.class,
-            ViewTextCopierAnnotator.PARAM_SOURCE_VIEW_NAME, GOLD_VIEW,
-            ViewTextCopierAnnotator.PARAM_DESTINATION_VIEW_NAME, SYSTEM_VIEW);
-    builder.add(textCopier);
+		AggregateBuilder builder = new AggregateBuilder();
 
-    // The sentenceAndTokenCopier copies Token and Sentence annotations in
-    // the GOLD_VIEW into the SYSTEM_VIEW
-    AnalysisEngineDescription sentenceAndTokenCopier = AnalysisEngineFactory
-            .createEngineDescription(S2bSentenceAndTokenCopier.class);
-    builder.add(sentenceAndTokenCopier, VIEW1, GOLD_VIEW, VIEW2,SYSTEM_VIEW);
-            
+		// The goldTagger parses the data in the default view into Token objects
+		// along with their part-of-speech tags which will be added to the
+		// GOLD_VIEW
+		AnalysisEngineDescription goldTagger = AnalysisEngineFactory.createEngineDescription(S2aGoldTagger.class);
 
-    // The baselineTagger is run on the SYSTEM_VIEW
-    AnalysisEngineDescription baselineTagger = AnalysisEngineFactory.createEngineDescription(
-            S2cBaselineTagger.class);
-    builder.add(baselineTagger, CAS.NAME_DEFAULT_SOFA, SYSTEM_VIEW);
+		builder.add(goldTagger);
 
-    // The evaluator will compare the part-of-speech tags in the SYSTEM_VIEW
-    // with those in the GOLD_VIEW
-    AnalysisEngineDescription evaluator = AnalysisEngineFactory.createEngineDescription(
-            S2dEvaluator.class);
-    builder.add(evaluator);
+		// The textCopier creates the SYSTEM_VIEW and set the text of this view
+		// to that of the text found in GOLD_VIEW
+		AnalysisEngineDescription textCopier = AnalysisEngineFactory.createEngineDescription(
+				ViewTextCopierAnnotator.class,
+				ViewTextCopierAnnotator.PARAM_SOURCE_VIEW_NAME, GOLD_VIEW,
+				ViewTextCopierAnnotator.PARAM_DESTINATION_VIEW_NAME, SYSTEM_VIEW);
+		builder.add(textCopier);
 
-    // The xWriter writes out the contents of each CAS (one per sentence) to an XMI file. 
-    // It is instructive to open one of these XMI files in the CAS Visual Debugger 
-    // and look at the contents of each view.
-    AnalysisEngineDescription xWriter = AnalysisEngineFactory.createEngineDescription(
-            S2eXmiWriter.class, S2eXmiWriter.PARAM_OUTPUT_DIRECTORY, "build/examples/pos/xmi");
-    builder.add(xWriter);
+		// The sentenceAndTokenCopier copies Token and Sentence annotations in
+		// the GOLD_VIEW into the SYSTEM_VIEW
+		AnalysisEngineDescription sentenceAndTokenCopier = AnalysisEngineFactory
+				.createEngineDescription(S2bSentenceAndTokenCopier.class);
+		builder.add(sentenceAndTokenCopier, VIEW1, GOLD_VIEW, VIEW2,SYSTEM_VIEW);
 
-    // runs the collection reader and the aggregate AE.
-    SimplePipeline.runPipeline(lineReader, builder.createAggregate());
-  }
+
+		// The baselineTagger is run on the SYSTEM_VIEW
+		AnalysisEngineDescription baselineTagger = AnalysisEngineFactory.createEngineDescription(
+				S2cBaselineTagger.class);
+		builder.add(baselineTagger, CAS.NAME_DEFAULT_SOFA, SYSTEM_VIEW);
+
+		// The evaluator will compare the part-of-speech tags in the SYSTEM_VIEW
+		// with those in the GOLD_VIEW
+		AnalysisEngineDescription evaluator = AnalysisEngineFactory.createEngineDescription(
+				S2dEvaluator.class);
+		builder.add(evaluator);
+
+		// The xWriter writes out the contents of each CAS (one per sentence) to an XMI file. 
+		// It is instructive to open one of these XMI files in the CAS Visual Debugger 
+		// and look at the contents of each view.
+		AnalysisEngineDescription xWriter = AnalysisEngineFactory.createEngineDescription(
+				S2eXmiWriter.class, S2eXmiWriter.PARAM_OUTPUT_DIRECTORY, "build/examples/pos/xmi");
+		builder.add(xWriter);
+
+		// runs the collection reader and the aggregate AE.
+		SimplePipeline.runPipeline(lineReader, builder.createAggregate());
+	}
 }

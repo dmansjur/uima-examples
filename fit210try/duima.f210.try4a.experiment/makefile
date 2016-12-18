@@ -1,10 +1,11 @@
 
+all: ecl
 
-all:
+hlp:
 	@echo make bld
 	@echo make cln
 
-ts:
+ts: cln
 	gradle generateTypeSystem
 
 bld: ts
