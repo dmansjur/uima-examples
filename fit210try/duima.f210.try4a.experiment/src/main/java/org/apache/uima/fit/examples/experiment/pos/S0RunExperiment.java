@@ -69,21 +69,17 @@ public class S0RunExperiment {
 
 	public static void main(String[] args) throws UIMAException, IOException {
 
-
+		// [] The lineReader simply copies the lines from the input file into the default view - one line per CAS
 		String samplePosFileName = "src/main/resources/org/apache/uima/fit/examples/pos/sample-gold.txt";
-
-		// The lineReader simply copies the lines from the input file into the
-		// default view - one line per CAS
 		CollectionReader lineReader = CollectionReaderFactory.createReader(S1LineReader.class,
 				S1LineReader.PARAM_INPUT_FILE, samplePosFileName);
 
+		// [] 
 		AggregateBuilder builder = new AggregateBuilder();
 
-		// The goldTagger parses the data in the default view into Token objects
-		// along with their part-of-speech tags which will be added to the
-		// GOLD_VIEW
+		// [] The goldTagger parses the data in the default view into Token objects
+		// along with their part-of-speech tags which will be added to the GOLD_VIEW
 		AnalysisEngineDescription goldTagger = AnalysisEngineFactory.createEngineDescription(S2aGoldTagger.class);
-
 		builder.add(goldTagger);
 
 		// The textCopier creates the SYSTEM_VIEW and set the text of this view

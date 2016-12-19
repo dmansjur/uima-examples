@@ -32,21 +32,25 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
 /**
- * This collection reader is meant for example purposes only. For a much more robust and complete
- * line reader implementation, please see org.cleartk.util.linereader.LineReader.
+ * This collection reader is meant for example purposes only. 
+ * For a much more robust and complete line reader implementation, 
+ * please see org.cleartk.util.linereader.LineReader.
  * 
- * This collection reader takes a single file and produces one JCas for each line in the file
+ * This collection reader takes a single file 
+ * and produces one JCas for each line in the file
  * putting the text of the line into the default view.
  */
 public class S1LineReader extends JCasCollectionReader_ImplBase {
 
-  public static final String PARAM_INPUT_FILE = "inputFile";
   @ConfigurationParameter
   private File inputFile;
+  public static final String PARAM_INPUT_FILE = "inputFile";
 
+  
   private String[] lines;
 
   private int lineIndex = 0;
+  
 
   @Override
   public void initialize(UimaContext uimaContext) throws ResourceInitializationException {
@@ -71,4 +75,5 @@ public class S1LineReader extends JCasCollectionReader_ImplBase {
     Progress progress = new ProgressImpl(lineIndex, lines.length, Progress.ENTITIES);
     return new Progress[] { progress };
   }
+  
 }

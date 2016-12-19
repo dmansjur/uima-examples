@@ -23,6 +23,8 @@ cln:
 	rm -rf bin
 
 cln-all: cln
+	rm -rf .classpath
+	rm -rf .project
 	rm -rf .settings
 	rm -rf .gradle
 
