@@ -1,17 +1,19 @@
 
+all: ecl
 
-all:
+hlp:
 	@echo make bld
 	@echo make cln
 
-ts:
+ts: cln
 	gradle generateTypeSystem
 
 bld: ts
+	$(eval destDir=build/generated-src/jcasgen/main/)
+	cp src/main/typesystem/*xml ${destDir}
 	gradle build
-	cp src/main/typesystem/*xml build/generated-src/jcasgen/main/org/apache/uima/fit/examples/type/
 
-ecl:
+ecl: bld
 	gradle eclipse
 	sed -i.bak '/"generated-src\/jcasgen\/main"/d' .classpath
 
@@ -22,6 +24,8 @@ cln:
 	rm -rf bin
 
 cln-all: cln
+	rm -rf .classpath
+	rm -rf .project
 	rm -rf .settings
 	rm -rf .gradle
 

@@ -18,39 +18,29 @@
  */
 package org.apache.uima.fit.examples.experiment.pos;
 
-import static org.apache.uima.fit.examples.experiment.pos.ViewNames.VIEW1;
-import static org.apache.uima.fit.examples.experiment.pos.ViewNames.VIEW2;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.SofaCapability;
-import org.apache.uima.fit.examples.type.Sentence;
 import org.apache.uima.fit.examples.type.Token;
 import org.apache.uima.jcas.JCas;
 
 /**
- * This simple AE copies tokens and sentences from one view to another.
+ * This "baseline" part-of-speech tagger isn't very sophisticated! Notice, however, that the tagger
+ * operates on the default view. This will be mapped to the "system" view when we run our
+ * experiment.
  */
-@SofaCapability(inputSofas = { VIEW1, VIEW2 })
-public class SentenceAndTokenCopier extends JCasAnnotator_ImplBase {
+public class S2cBaselineTagger extends JCasAnnotator_ImplBase {
 
   @Override
   public void process(JCas jCas) throws AnalysisEngineProcessException {
-    try {
-      JCas view1 = jCas.getView(VIEW1);
-      JCas view2 = jCas.getView(VIEW2);
-
-      for (Token token1 : select(view1, Token.class)) {
-        new Token(view2, token1.getBegin(), token1.getEnd()).addToIndexes();
+    for (Token token : select(jCas, Token.class)) {
+      String word = token.getCoveredText();
+      if (word.equals("a") || word.equals("the")) {
+        token.setPos("DT");
+      } else {
+        token.setPos("NN");
       }
-
-      for (Sentence sentence1 : select(view1, Sentence.class)) {
-        new Sentence(view2, sentence1.getBegin(), sentence1.getEnd()).addToIndexes();
-      }
-    } catch (CASException ce) {
-      throw new AnalysisEngineProcessException(ce);
     }
   }
 }

@@ -18,8 +18,8 @@
  */
 package org.apache.uima.fit.examples.experiment.pos;
 
-import static org.apache.uima.fit.examples.experiment.pos.ViewNames.GOLD_VIEW;
-import static org.apache.uima.fit.examples.experiment.pos.ViewNames.SYSTEM_VIEW;
+//import static org.apache.uima.fit.examples.experiment.pos.ViewNames.GOLD_VIEW;
+//import static org.apache.uima.fit.examples.experiment.pos.ViewNames.SYSTEM_VIEW;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -40,8 +40,8 @@ import org.apache.uima.jcas.JCas;
  * real-world scenarios for a number of reasons (e.g. no confusion matrix, assumes gold-standard
  * tokens and sentences in the system view, etc.)
  */
-@SofaCapability(inputSofas = { GOLD_VIEW, SYSTEM_VIEW })
-public class Evaluator extends JCasAnnotator_ImplBase {
+@SofaCapability(inputSofas = { S0RunExperiment.GOLD_VIEW, S0RunExperiment.SYSTEM_VIEW })
+public class S2dEvaluator extends JCasAnnotator_ImplBase {
 
   private int totalCorrect = 0;
 
@@ -50,8 +50,8 @@ public class Evaluator extends JCasAnnotator_ImplBase {
   @Override
   public void process(JCas jCas) throws AnalysisEngineProcessException {
     try {
-      JCas goldView = jCas.getView(GOLD_VIEW);
-      JCas systemView = jCas.getView(SYSTEM_VIEW);
+      JCas goldView = jCas.getView(S0RunExperiment.GOLD_VIEW);
+      JCas systemView = jCas.getView(S0RunExperiment.SYSTEM_VIEW);
 
       for (Sentence goldSentence : select(goldView, Sentence.class)) {
         List<Token> goldTokens = selectCovered(goldView, Token.class, goldSentence);

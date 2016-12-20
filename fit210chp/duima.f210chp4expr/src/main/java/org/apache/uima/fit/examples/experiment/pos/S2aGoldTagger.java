@@ -18,7 +18,7 @@
  */
 package org.apache.uima.fit.examples.experiment.pos;
 
-import static org.apache.uima.fit.examples.experiment.pos.ViewNames.GOLD_VIEW;
+//import static org.apache.uima.fit.examples.experiment.pos.ViewNames.GOLD_VIEW;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,21 +35,23 @@ import org.apache.uima.jcas.JCas;
 
 /**
  * This AE assumes that their is part-of-speech tagged text in the default view with the format
- * "word/tag word/tag...". It converts this data into Token objects and plain text which are posted
- * to the GOLD_VIEW.
+ * "word/tag word/tag...". 
+ * 
+ * It converts this data into Token objects and plain text which are posted to the GOLD_VIEW.
  */
-@SofaCapability(inputSofas = CAS.NAME_DEFAULT_SOFA, outputSofas = GOLD_VIEW)
-public class GoldTagger extends JCasAnnotator_ImplBase {
+@SofaCapability(inputSofas = CAS.NAME_DEFAULT_SOFA, outputSofas = S0RunExperiment.GOLD_VIEW)
+public class S2aGoldTagger extends JCasAnnotator_ImplBase {
 
   @Override
   public void process(JCas jCas) throws AnalysisEngineProcessException {
+	  
     try {
       JCas defaultView = jCas.getView(CAS.NAME_DEFAULT_SOFA); 
       // see JavaDoc comment for SofaCapability for why we have to retrieve the default view from
       // the JCas
       String tagData = defaultView.getDocumentText();
 
-      JCas goldView = ViewCreatorAnnotator.createViewSafely(jCas, GOLD_VIEW);
+      JCas goldView = ViewCreatorAnnotator.createViewSafely(jCas, S0RunExperiment.GOLD_VIEW);
 
       String[] wordTagPairs = tagData.split("\\s+");
       StringBuffer text = new StringBuffer();
@@ -72,8 +74,11 @@ public class GoldTagger extends JCasAnnotator_ImplBase {
       for (Token token : tokens) {
         token.addToIndexes();
       }
+      
     } catch (CASException ce) {
       throw new AnalysisEngineProcessException(ce);
     }
+    
   }
+  
 }

@@ -1,2 +1,3 @@
+classpath*:*.xml
 classpath*:org/apache/uima/fit/examples/type/*.xml
 classpath*:org/apache/uima/fit/examples/tutorial/type/*.xml
