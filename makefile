@@ -1,0 +1,4 @@
+
+
+cln:
+	find ./ -name "*~" -delete

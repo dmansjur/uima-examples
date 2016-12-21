@@ -2,10 +2,12 @@ UIMAFit Examples 2.1
 
 
 
-https://uima.apache.org/d/uimafit-2.1.0/
+ - binary -- https://uima.apache.org/d/uimafit-2.1.0/
+ - source -- http://ftp.wayne.edu/apache//uima/
+ - repositry -- https://github.com/apache/uima-uimafit
 
-Codes
-https://github.com/apache/uima-uimafit
+
+
 
 
 FAQ

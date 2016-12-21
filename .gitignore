@@ -1,2 +1,7 @@
 *~
 *bak
+.gradle
+.settings
+uimaj260core
+uimaj260test
+
