@@ -1,4 +1,4 @@
-UIMA-examples : a simple way of using UIMA framework
+UIMA-examples 
 =============================
 
 *** Installation

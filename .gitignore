@@ -1,7 +1,13 @@
 *~
+*class
 *bak
 .gradle
 .settings
 uimaj260core
 uimaj260test
-
+uimaj260examples/duima.j260.ex1*
+uimaj260examples/duima.j260.ex2*
+uimaj260examples/duima.j260.ex3*
+uimaj260examples/duima.j260.ex4*
+uimaj260examples/duima.j260.ex5*
+uimaj260examples/duima.j260.ex6*
