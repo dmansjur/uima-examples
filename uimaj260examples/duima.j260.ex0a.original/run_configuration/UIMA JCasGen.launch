@@ -22,7 +22,7 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="uimaj-examples"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="duima.j260.ex0a.original"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="&quot;-Djava.util.logging.config.file=${env_var:UIMA_HOME}/config/FileConsoleLogger.properties&quot;"/>
 <stringAttribute key="org.eclipse.debug.ui.target_debug_perspective" value="perspective_default"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">

@@ -1,0 +1,5 @@
+/bin/
+uima.log
+vns.*
+.project
+.classpath
