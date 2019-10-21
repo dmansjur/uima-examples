@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>uima.ml</artifactId>
+    <groupId>d.uimaj</groupId>
+    <version>0.1</version>
+  </parent>
   <groupId>d.uimaj</groupId>
-  <artifactId>d.uima</artifactId>
+  <artifactId>uima.ctk</artifactId>
   <version>0.1</version>
   <packaging>pom</packaging>
-  <name>d.uima</name>
-<modules>  <module>uima.nlp</module>
-    <module>uima.ml</module>
+  <name>uima.ctk</name>
+<modules>  <module>uima.ctk.hw</module>
   </modules>
 </project>
